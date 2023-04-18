@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormationController!{% endblock %}
+
+{% block body %}
+    <div id="formationList">
+        {% for formation in formations %}
+            <div>
+                <div></div>
+                <div>
+                    <a href="">Formation {{ formation }}</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

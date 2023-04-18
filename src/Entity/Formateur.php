@@ -29,7 +29,7 @@ class Formateur
     private ?string $tel = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $ville = null;
+    private ?string $city = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $birthday = null;
@@ -98,14 +98,14 @@ class Formateur
         return $this;
     }
 
-    public function getVille(): ?string
+    public function getcity(): ?string
     {
-        return $this->ville;
+        return $this->city;
     }
 
-    public function setVille(string $ville): self
+    public function setcity(string $city): self
     {
-        $this->ville = $ville;
+        $this->city = $city;
 
         return $this;
     }
