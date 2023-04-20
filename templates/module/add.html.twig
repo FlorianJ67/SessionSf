@@ -3,15 +3,17 @@
 {% block title %}Ajout Module{% endblock %}
 
 {% block body %}
-        {{ form_start(formAddFormateur) }}
+        {{ form_start(formAddModule) }}
     
-            {{ form_row(formAddFormateur.firstName) }}
-            {{ form_row(formAddFormateur.lastName) }}
-            {{ form_row(formAddFormateur.sex) }}
-            {{ form_row(formAddFormateur.tel) }}
-            {{ form_row(formAddFormateur.city) }}
-            {{ form_row(formAddFormateur.birthday) }}
-            {{ form_row(formAddFormateur.email) }}
+            {{ form_row(formAddModule.name) }}
+            {{ form_row(formAddModule.categorie) }}
 
-        {{ form_end(formAddFormateur) }}
+        {{ form_end(formAddModule) }}
+
+        {{ form_start(formAddCategorie) }}
+    
+            {{ form_row(formAddCategorie.name) }}
+
+        {{ form_end(formAddCategorie) }}
+
 {% endblock %}

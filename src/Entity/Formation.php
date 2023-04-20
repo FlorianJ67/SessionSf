@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FormationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
@@ -16,8 +18,14 @@ class Formation
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Formation')]
-    private ?Session $session = null;
+    #[ORM\OneToMany(mappedBy: 'formation', targetEntity: Session::class, orphanRemoval: true)]
+    private Collection $sessions;
+
+    public function __construct()
+    {
+        $this->sessions = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -36,19 +44,37 @@ class Formation
         return $this;
     }
 
-    public function getSession(): ?Session
-    {
-        return $this->session;
+    public function __toString() {
+        return $this->name;
     }
 
-    public function setSession(?Session $session): self
+    /**
+     * @return Collection<int, Session>
+     */
+    public function getSessions(): Collection
     {
-        $this->session = $session;
+        return $this->sessions;
+    }
+
+    public function addSession(Session $session): self
+    {
+        if (!$this->sessions->contains($session)) {
+            $this->sessions->add($session);
+            $session->setFormation($this);
+        }
 
         return $this;
     }
 
-    public function __toString() {
-        return $this->name;
+    public function removeSession(Session $session): self
+    {
+        if ($this->sessions->removeElement($session)) {
+            // set the owning side to null (unless already changed)
+            if ($session->getFormation() === $this) {
+                $session->setFormation(null);
+            }
+        }
+
+        return $this;
     }
 }

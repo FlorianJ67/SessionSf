@@ -25,18 +25,21 @@ class Session
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateFin = null;
 
-    #[ORM\OneToMany(mappedBy: 'session', targetEntity: Formation::class)]
-    private Collection $Formation;
-
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     private ?Formateur $Formateur = null;
 
     #[ORM\ManyToMany(targetEntity: Stagiaire::class, inversedBy: 'sessions')]
     private Collection $inscrit;
 
+    #[ORM\Column(length: 100)]
+    private ?string $name = null;
+
+    #[ORM\ManyToOne(inversedBy: 'sessions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Formation $formation = null;
+
     public function __construct()
     {
-        $this->Formation = new ArrayCollection();
         $this->inscrit = new ArrayCollection();
     }
 
@@ -81,36 +84,6 @@ class Session
         return $this;
     }
 
-    /**
-     * @return Collection<int, Formation>
-     */
-    public function getFormation(): Collection
-    {
-        return $this->Formation;
-    }
-
-    public function addFormation(Formation $formation): self
-    {
-        if (!$this->Formation->contains($formation)) {
-            $this->Formation->add($formation);
-            $formation->setSession($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFormation(Formation $formation): self
-    {
-        if ($this->Formation->removeElement($formation)) {
-            // set the owning side to null (unless already changed)
-            if ($formation->getSession() === $this) {
-                $formation->setSession(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getFormateur(): ?Formateur
     {
         return $this->Formateur;
@@ -143,6 +116,30 @@ class Session
     public function removeInscrit(Stagiaire $inscrit): self
     {
         $this->inscrit->removeElement($inscrit);
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFormation(): ?Formation
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(?Formation $formation): self
+    {
+        $this->formation = $formation;
 
         return $this;
     }

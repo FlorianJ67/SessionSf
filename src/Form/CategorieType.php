@@ -15,7 +15,9 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Ajouter'
+            ])
         ;
     }
 
