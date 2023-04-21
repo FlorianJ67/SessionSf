@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SessionController!{% endblock %}
+
+{% block body %}
+    <div id="sessionInfo">
+            <div>
+                <a href="{{ path('info_session', {'id': session.id}) }}">{{ session }}</a>
+            </div>
+            <div>
+                <p>{{ session.formation }}</p>
+                <p>{{ session.formateur }}</p>
+                <p>{{ session.dateDebut | date('d-m-Y') }} - {{ session.dateFin | date('d-m-Y') }}</p>
+
+                <div id="listStagiaireSession">
+                    {% for stagiaire in session.inscrit %}
+                        <a href='{{ path('info_stagiaire', {'id': stagiaire.id}) }}'>{{stagiaire}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+
+{% endblock %}

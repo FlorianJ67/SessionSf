@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout Session{% endblock %}
+
+{% block body %}
+        {{ form_start(formAddSession) }}
+    
+            {{ form_row(formAddSession.name) }}
+            {{ form_row(formAddSession.dateDebut) }}
+            {{ form_row(formAddSession.dateFin) }}
+            {{ form_row(formAddSession.formateur) }}
+
+        {{ form_end(formAddSession) }}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Info Formateur{% endblock %}
+
+{% block body %}
+    <div id="formateurInfo">
+            <div>
+                <a href="{{ path('info_formateur', {'id': formateur.id}) }}">{{ formateur }}</a>
+            </div>
+            <div>
+                <p>Sex: {{ formateur.sex }}</p>
+                <p>Ville: {{ formateur.city }}</p>
+                <p>Date de Naissance: {{ formateur.birthday | date('d/m/Y')}}</p>
+                <p>Téléphone: {{ formateur.tel }}</p>
+                <p>Mail: {{ formateur.email }}</p>
+               
+            </div>
+            <div id="listSessionformateur">
+                {% for session in formateur.sessions %}
+                    <a href='{{ path('info_session', {'id': session.id}) }}'>{{session}}</a>
+                {% endfor %}
+            </div>
+    </div>
+
+{% endblock %}

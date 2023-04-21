@@ -26,7 +26,10 @@ class Session
     private ?\DateTimeInterface $dateFin = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
-    private ?Formateur $Formateur = null;
+    private ?Formateur $formateur = null;
+
+    #[ORM\ManyToMany(targetEntity: Module::class, inversedBy: 'sessions')]
+    private Collection $contenuSession;
 
     #[ORM\ManyToMany(targetEntity: Stagiaire::class, inversedBy: 'sessions')]
     private Collection $inscrit;
@@ -86,12 +89,36 @@ class Session
 
     public function getFormateur(): ?Formateur
     {
-        return $this->Formateur;
+        return $this->formateur;
     }
 
-    public function setFormateur(?Formateur $Formateur): self
+    public function setFormateur(?Formateur $formateur): self
     {
-        $this->Formateur = $Formateur;
+        $this->formateur = $formateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Module>
+     */
+    public function getContenuSession(): Collection
+    {
+        return $this->contenuSession;
+    }
+
+    public function addContenuSession(Module $contenuSession): self
+    {
+        if (!$this->contenuSession->contains($contenuSession)) {
+            $this->contenuSession->add($contenuSession);
+        }
+
+        return $this;
+    }
+
+    public function removeContenuSession(Module $contenuSession): self
+    {
+        $this->contenuSession->removeElement($contenuSession);
 
         return $this;
     }
@@ -142,6 +169,11 @@ class Session
         $this->formation = $formation;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
 }

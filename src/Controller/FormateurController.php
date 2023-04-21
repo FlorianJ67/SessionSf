@@ -5,18 +5,20 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Formateur;
 use App\Form\FormateurType;
-use Symfony\Component\HttpFoundation\Request;
 
 class FormateurController extends AbstractController
 {
     #[Route('/formateur', name: 'app_formateur')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $formateurs = $entityManager->getRepository(formateur::class)->findAll();
         return $this->render('formateur/index.html.twig', [
-            'controller_name' => 'FormateurController',
+            'formateurs' => $formateurs
         ]);
     }
 
@@ -47,6 +49,15 @@ class FormateurController extends AbstractController
         return $this->render('formateur/add.html.twig', [
             'formAddFormateur' => $form->createView(),
             'edit' => $formateur->getId()
+        ]);
+    }
+
+    #[Route('/formateur/{id}', name: 'info_formateur')]
+    public function info(Formateur $formateur): Response
+    {
+
+        return $this->render('formateur/info.html.twig', [
+            'formateur' => $formateur
         ]);
 
     }

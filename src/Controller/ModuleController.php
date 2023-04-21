@@ -5,21 +5,23 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Module;
 use App\Entity\Categorie;
 use App\Form\ModuleType;
 use App\Form\CategorieType;
-use Symfony\Component\HttpFoundation\Request;
 
 class ModuleController extends AbstractController
 {
     #[Route('/module', name: 'app_module')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $modules = $entityManager->getRepository(Module::class)->findAll();
+
         return $this->render('module/index.html.twig', [
-            // faire un fetch all de module !!!
-            'modules' => 'ModuleController',
+            'modules' => $modules,
         ]);
     }
 
@@ -69,6 +71,15 @@ class ModuleController extends AbstractController
             'formAddModule' => $form->createView(),
             'formAddCategorie' => $formCategorie->createView(),
             'edit' => $module->getId()
+        ]);
+    }
+
+    #[Route('/module/{id}', name: 'info_module')]
+    public function info(Module $module): Response
+    {
+
+        return $this->render('module/info.html.twig', [
+            'module' => $module
         ]);
 
     }

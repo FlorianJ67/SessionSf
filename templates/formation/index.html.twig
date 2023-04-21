@@ -8,7 +8,7 @@
             <div>
                 <div></div>
                 <div>
-                    <a href="">Formation {{ formation }}</a>
+                    <a href="{{ path('info_formation', {'id': formation.id}) }}">Formation {{ formation }}</a>
                 </div>
             </div>
         {% endfor %}

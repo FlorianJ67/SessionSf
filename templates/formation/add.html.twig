@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout Formation{% endblock %}
+
+{% block body %}
+        {{ form_start(formAddFormation) }}
+    
+            {{ form_row(formAddFormation.name) }}
+
+        {{ form_end(formAddFormation) }}
+{% endblock %}

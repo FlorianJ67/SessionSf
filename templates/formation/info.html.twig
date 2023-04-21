@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Info formation{% endblock %}
+
+{% block body %}
+    <div id="formationInfo">
+            <div>
+                <a href="{{ path('info_formation', {'id': formation.id}) }}">{{ formation }}</a>
+            </div>
+            <div id="listSessionFormation">
+                <p>Sessions:</p>
+                {% for session in formation.sessions %}
+                    <div>
+                        <a href='{{ path('info_session', {'id': session.id}) }}'>{{session}}</a>
+                        
+                        {% for bertrand in session.contenuSession %}
+                            <p>{{ bertrand.duree }}</p> 
+                        {% endfor %}                
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+
+{% endblock %}

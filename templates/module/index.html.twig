@@ -4,6 +4,6 @@
 
 {% block body %}
     {% for module in modules %}
-        <p>{{ module }}</p>
+        <a href="{{ path('info_module', {'id': module.id}) }}">{{ module.name }}</a>
     {% endfor %}
 {% endblock %}
