@@ -11,6 +11,7 @@
                 <p>{{ session.formation }}</p>
                 <p>{{ session.formateur }}</p>
                 <p>{{ session.dateDebut | date('d-m-Y') }} - {{ session.dateFin | date('d-m-Y') }}</p>
+                {# <p>{{ session.contenuSession.duree }}</p> #}
 
                 <div id="listStagiaireSession">
                     {% for stagiaire in session.inscrit %}

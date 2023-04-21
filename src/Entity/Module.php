@@ -22,7 +22,7 @@ class Module
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $Categorie = null;
 
-    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'ContenuSession')]
+    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'modules')]
     private Collection $sessions;
 
     public function __construct()

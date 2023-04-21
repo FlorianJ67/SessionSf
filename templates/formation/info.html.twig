@@ -11,11 +11,9 @@
                 <p>Sessions:</p>
                 {% for session in formation.sessions %}
                     <div>
-                        <a href='{{ path('info_session', {'id': session.id}) }}'>{{session}}</a>
+                        <a href='{{ path('info_session', {'id': session.id}) }}'>{{ session }}</a>
                         
-                        {% for bertrand in session.contenuSession %}
-                            <p>{{ bertrand.duree }}</p> 
-                        {% endfor %}                
+                        {# {{ session.contenuSession.duree }}               #}
                     </div>
                 {% endfor %}
             </div>
