@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --colorOne: rgb(114, 114, 114);
+    --colorTwo: rgb(219, 219, 219);
+    --colorThree: rgb(71, 71, 71);
+    --colorFour: rgb(34, 34, 34);
+}
+/* --HEADER-- */
+header {
+    height: 50px;
+}
+/* --endHEADER-- */
+
+/* --MAIN-- */
+#main {
+    background-color: var(--colorOne);
+}
+#main p {
+    color: var(--colorFour);
+}
+#content>div {
+    background-color: var(--colorThree);
+}
+#content:first-child {
+    border-radius: 15px 15px 0 0;
+}
+
+/* FORM */
+input {
+    background-color: var(--colorTwo);
+}
+input[type="submit"] {
+    background-color: var(--colorThree);
+    color: var(--colorTwo);
+    padding: 3px;
+}
+/* endFORM */
+
+/* --endMAIN-- */
+
+/* --FOOTER-- */
+footer {
+    height: 50px;
+}
+/* --endFOOTER-- */
