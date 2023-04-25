@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Module;
 use App\Entity\Session;
 use App\Entity\Stagiaire;
 use App\Repository\SessionRepository;
@@ -57,10 +58,35 @@ class SessionController extends AbstractController
         ]);
     }
 
-    #[Route('/session/{idsession}/removeFromSession/{idstagiaire}/', name: 'remove_from_session')]
+    #[Route('/session/{idsession}/removeModuleFromSession/{idmodule}/', name: 'remove_module_from_session')]
+    #[ParamConverter("session", options:["mapping" => ["idsession" => "id"]])]
+    #[ParamConverter("module", options:["mapping" => ["idmodule" => "id"]])]
+    public function removeModuleFromSession(ManagerRegistry $doctrine, Session $session, Module $module, Request $request): Response{
+        
+        $entityManager = $doctrine->getManager();
+        $session->removeInscrit($module);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('info_session', ['id'=>$session->getId()]);
+    }
+
+    #[Route('/session/{idsession}/addModuleToSession/{idmodule}/', name: 'add_module_to_session')]
+    #[ParamConverter("session", options:["mapping" => ["idsession" => "id"]])]
+    #[ParamConverter("module", options:["mapping" => ["idmodule" => "id"]])]
+    public function addModuleToSession(ManagerRegistry $doctrine, Session $session, Module $module, Request $request): Response{
+        
+        $entityManager = $doctrine->getManager();
+        $session->addInscrit($module);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('info_session', ['id'=>$session->getId()]);
+    }
+
+
+    #[Route('/session/{idsession}/removeStagiaireFromSession/{idstagiaire}/', name: 'remove_stagiaire_from_session')]
     #[ParamConverter("session", options:["mapping" => ["idsession" => "id"]])]
     #[ParamConverter("stagiaire", options:["mapping" => ["idstagiaire" => "id"]])]
-    public function removeFromSession(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire, Request $request): Response{
+    public function removeStagiaireFromSession(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire, Request $request): Response{
         
         $entityManager = $doctrine->getManager();
         $session->removeInscrit($stagiaire);
@@ -69,10 +95,10 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('info_session', ['id'=>$session->getId()]);
     }
 
-    #[Route('/session/{idsession}/addToSession/{idstagiaire}/', name: 'add_to_session')]
+    #[Route('/session/{idsession}/addStagiaireToSession/{idstagiaire}/', name: 'add_stagiaire_to_session')]
     #[ParamConverter("session", options:["mapping" => ["idsession" => "id"]])]
     #[ParamConverter("stagiaire", options:["mapping" => ["idstagiaire" => "id"]])]
-    public function addToSession(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire, Request $request): Response{
+    public function addStagiaireToSession(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire, Request $request): Response{
         
         $entityManager = $doctrine->getManager();
         $session->addInscrit($stagiaire);
@@ -87,11 +113,13 @@ class SessionController extends AbstractController
     {
         $session_id = $session->getId();
         $nonInscrits = $sr->findNonInscrits($session_id);
+        $nonModules = $sr->findNonModule($session_id);
         // $nonProgrammes = $sr->findNonProgrammes($session_id);
 
         return $this->render('session/info.html.twig', [
             'session' => $session,
-            'nonInscits' => $nonInscrits,
+            'nonInscrits' => $nonInscrits,
+            'nonModule' => $nonModules,
             // 'nonProgrammes' => $nonProgrammes
         ]);
     }

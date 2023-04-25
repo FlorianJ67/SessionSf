@@ -65,6 +65,34 @@ class SessionRepository extends ServiceEntityRepository
         $query = $sub->getQuery();
         return $query->getResult();
     }
+    // !!!  le bug est là  !!!
+    // !!! !!! !!! !!! !!! !!!
+    public function findNonModule($session_id) {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+
+        $qb = $sub;
+        // sélectionner tous les modules d'une session dont l'id est passé en paramètre
+        $qb->select('m')
+            ->from('App\Entity\Module', 'm')
+            ->leftJoin('m.sessions', 'se')
+            ->where('se.id = :id');
+
+        $sub = $em->createQueryBuilder();
+        // sélectionner tous les modules qui ne SONT PAS (NOT IN) dans le résultat précédent
+        // on obtient donc les modules non inscrits pour une session définie
+        $sub->select('m')
+            ->from('App\Entity\Module','m')
+            ->where($sub->expr()->notIn('m.id', $qb->getDQL()))
+            // requête parametrée
+            ->setParameter('id', $session_id)
+            // trier la liste des module sur le nom
+            ->orderBy('m.name');
+
+        // renvoyer le résultat
+        $query = $sub->getQuery();
+        return $query->getResult();
+    }
 
 //    /**
 //     * @return Session[] Returns an array of Session objects
