@@ -5,21 +5,31 @@ body {
 :root {
     --colorOne: rgb(114, 114, 114);
     --colorTwo: rgb(219, 219, 219);
-    --colorThree: rgb(71, 71, 71);
-    --colorFour: rgb(34, 34, 34);
+    --colorThree: rgb(79, 72, 85);
+    --colorFour: rgb(54, 54, 54);
 }
 /* --HEADER-- */
 header {
     height: 50px;
+    background-color: var(--colorOne);
 }
 /* --endHEADER-- */
 
 /* --MAIN-- */
 #main {
     background-color: var(--colorOne);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-#main p {
+#main p, #main h1, #main a{
     color: var(--colorFour);
+}
+#main a {
+    text-decoration: none;
+}
+#main a:hover, #main a:focus {
+    opacity: 0.7;
 }
 #content>div {
     background-color: var(--colorThree);
@@ -32,6 +42,94 @@ header {
     background-color: var(--colorTwo);
     display: flex;
 }
+
+/* SessionList */
+#sessionList {
+    background-color: var(--colorThree);
+    width: 90%;
+    display: flex;
+    padding: 1%;
+}
+#sessionList a {
+    margin: 0.7rem 0;
+}
+#sessionList>div {
+    width: 30%;
+}
+#sessionList>div>div {
+    background-color: var(--colorTwo);
+    padding: 8px;
+}
+#sessionList>div>div:first-child {
+    width: fit-content;
+    border-radius: 15px 15px 0 0;
+    border: 1px solid var(--colorFour);
+    border-bottom: none;
+    z-index: 2;
+    position: relative;
+    margin-bottom: -1px;
+}
+#sessionList>div>div:last-child {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 3px 3px 3px;
+    position: relative;
+    border: 1px solid var(--colorFour);
+}
+#sessionList>div>div:last-child>p:last-child, #sessionList>div>div:last-child>a:first-child {
+    text-align: end;
+}
+#sessionList>div>div:last-child>a:first-child {
+    position: absolute;
+    right: 2%;
+    margin: 0;
+}
+/* endSessionList */
+
+/* FormateurInfo */
+#formateurInfo {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+#formateurInfo a, #formateurInfo p {
+    color: var(--colorTwo);
+    margin: 2%;
+}
+#formateurInfo>div {
+    background-color: var(--colorThree);
+}
+#formateurInfo>div:first-child {
+    border-radius: 15px 15px 0 0;
+    width: fit-content;
+    padding: 0 0.5%;
+    text-align: center;
+}
+#formateurInfo>div:nth-child(2){
+    width: 100%;
+}
+/* endFormateurInfo */
+
+/* FormationInfo */
+#formationInfo {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+#formationInfo a, #formationInfo p {
+    color: var(--colorTwo);
+    margin: 2%;
+}
+#formationInfo>div {
+    background-color: var(--colorThree);
+}
+#formationInfo>div:first-child {
+    border-radius: 15px 15px 0 0;
+    width: fit-content;
+    padding: 0 0.5%;
+    text-align: center;
+}
+/* endFormationInfo */
 
 /* FORM */
 input {

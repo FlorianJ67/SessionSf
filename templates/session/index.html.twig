@@ -1,14 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SessionController!{% endblock %}
+{% block title %}Liste Sessions{% endblock %}
 
 {% block body %}
     <div id="sessionList">
         {% for session in sessions %}
             <div>
-                <div></div>
                 <div>
-                    <a href="{{ path('info_session', {'id': session.id}) }}">session {{ session }}</a>
+                    <a href="{{ path('info_session', {'id': session.id}) }}">{{ session }}</a>
+                </div>
+                <div>
+                    <a>"Catégorie"</a>
+                    <a href='{{ path('info_formation', {'id': session.formation.id}) }}'>Formation: {{ session.formation }}</a>
+                    <a href='{{ path('info_formateur', {'id': session.formateur.id}) }}'>Formateur: {{ session.formateur }}</a>
+                    <p>{{ session.dateDebut | date('d/m/Y')}} - {{ session.dateFin | date('d/m/Y')}}</p>
+
+                    <p>Place : /{{ session.place}}</p>
                 </div>
             </div>
         {% endfor %}

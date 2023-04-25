@@ -9,11 +9,16 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
         {% endblock %}
 
-        {% block javascripts %}
+        {# {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        {% endblock %} #}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            
+        </header>
+        <div id="main">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>

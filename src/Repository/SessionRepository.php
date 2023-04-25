@@ -81,13 +81,13 @@ class SessionRepository extends ServiceEntityRepository
         $sub = $em->createQueryBuilder();
         // sélectionner tous les modules qui ne SONT PAS (NOT IN) dans le résultat précédent
         // on obtient donc les modules non inscrits pour une session définie
-        $sub->select('m')
-            ->from('App\Entity\Module','m')
-            ->where($sub->expr()->notIn('m.id', $qb->getDQL()))
+        $sub->select('mo')
+            ->from('App\Entity\Module','mo')
+            ->where($sub->expr()->notIn('mo.id', $qb->getDQL()))
             // requête parametrée
             ->setParameter('id', $session_id)
             // trier la liste des module sur le nom
-            ->orderBy('m.name');
+            ->orderBy('mo.name');
 
         // renvoyer le résultat
         $query = $sub->getQuery();
