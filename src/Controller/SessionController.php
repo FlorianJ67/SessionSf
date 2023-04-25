@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\SessionRepository;
 
 class SessionController extends AbstractController
 {
@@ -55,13 +56,17 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}', name: 'info_session')]
-    public function info(Session $session): Response
+    #[IsGranted("ROLE_USER")]
+    public function info(Session $session, SessionRepository $sr): Response
     {
+        $session_id = $session->getId();
+        $nonInscrits = $sr->findNonInscrits($session_id);
+        // $nonProgrammes = $sr->findNonProgrammes($session_id);
 
         return $this->render('session/info.html.twig', [
-            'session' => $session
+            'session' => $session,
+            'nonInscits' => $nonInscrits,
+            // 'nonProgrammes' => $nonProgrammes
         ]);
-
     }
-
 }

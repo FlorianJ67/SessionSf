@@ -28,6 +28,11 @@ header {
     border-radius: 15px 15px 0 0;
 }
 
+#sessionInfo {
+    background-color: var(--colorTwo);
+    display: flex;
+}
+
 /* FORM */
 input {
     background-color: var(--colorTwo);
