@@ -15,7 +15,13 @@
 
                 <div id="listStagiaireSession">
                     {% for stagiaire in session.inscrit %}
-                        <a href='{{ path('info_stagiaire', {'id': stagiaire.id}) }}'>{{stagiaire}}</a>
+                        <p><a href='{{ path('info_stagiaire', {'id': stagiaire.id}) }}'>{{stagiaire}}</a></a><a href="{{ path('remove_from_session', {'idsession': session.id, 'idstagiaire': stagiaire.id}) }}"> X </a></p>
+                    {% endfor %}
+                </div>
+                <h2>Non inscrit :</h2>
+                <div id="listStagiaireNonInscrit">
+                    {% for stagiaire in nonInscits %}
+                        <p><a href='{{ path('info_stagiaire', {'id': stagiaire.id}) }}'>{{stagiaire}}</a><a href="{{ path('add_to_session', {'idsession': session.id, 'idstagiaire': stagiaire.id}) }}"> + </a></p>
                     {% endfor %}
                 </div>
             </div>

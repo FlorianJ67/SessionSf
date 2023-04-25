@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Stagiaire;
+use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Repository\SessionRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class SessionController extends AbstractController
 {
@@ -52,11 +55,34 @@ class SessionController extends AbstractController
             'formAddSession' => $form->createView(),
             'edit' => $session->getId()
         ]);
+    }
 
+    #[Route('/session/{idsession}/removeFromSession/{idstagiaire}/', name: 'remove_from_session')]
+    #[ParamConverter("session", options:["mapping" => ["idsession" => "id"]])]
+    #[ParamConverter("stagiaire", options:["mapping" => ["idstagiaire" => "id"]])]
+    public function removeFromSession(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire, Request $request): Response{
+        
+        $entityManager = $doctrine->getManager();
+        $session->removeInscrit($stagiaire);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('info_session', ['id'=>$session->getId()]);
+    }
+
+    #[Route('/session/{idsession}/addToSession/{idstagiaire}/', name: 'add_to_session')]
+    #[ParamConverter("session", options:["mapping" => ["idsession" => "id"]])]
+    #[ParamConverter("stagiaire", options:["mapping" => ["idstagiaire" => "id"]])]
+    public function addToSession(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire, Request $request): Response{
+        
+        $entityManager = $doctrine->getManager();
+        $session->addInscrit($stagiaire);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('info_session', ['id'=>$session->getId()]);
     }
 
     #[Route('/session/{id}', name: 'info_session')]
-    #[IsGranted("ROLE_USER")]
+    // #[IsGranted("ROLE_USER")]
     public function info(Session $session, SessionRepository $sr): Response
     {
         $session_id = $session->getId();
