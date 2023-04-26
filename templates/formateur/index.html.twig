@@ -8,7 +8,7 @@
             <div>
                 <div></div>
                 <div>
-                    <a href="">Formateur {{ formateur }}</a>
+                    <a href="{{ path('info_formateur', {'id': formateur.id})  }}">Formateur {{ formateur }}</a>
                 </div>
             </div>
         {% endfor %}

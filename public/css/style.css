@@ -46,7 +46,7 @@ header ul li a:hover {
     text-decoration: none;
 }
 #main a:hover, #main a:focus {
-    opacity: 0.7;
+    opacity: 0.8;
 }
 #content>div {
     background-color: var(--colorThree);
@@ -70,10 +70,19 @@ header ul li a:hover {
 #formationList>div {
     margin: 3% 0;
 }
+#formationList>div:hover div {
+    box-shadow: rgba(255, 254, 254, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.12) 0px -12px 30px, rgba(255, 255, 255, 0.12) 0px 4px 6px, rgba(255, 255, 255, 0.17) 0px 12px 13px, rgba(255, 255, 255, 0.09) 0px -3px 5px;
+    transition: 0.1s;
+}
+#formationList>div:hover div:first-child {
+    background-color: white;
+}
 #formationList>div>div:first-child{
     height: 10px;
     width: 10px;
     border-radius: 5px 5px 0 0;
+    position: relative;
+    z-index: 2;
 }
 #formationList>div>div:nth-child(2){
     border-radius: 0 5px 5px 5px;
@@ -129,6 +138,9 @@ header ul li a:hover {
     display: flex;
     justify-content: center;
 }
+#listSessionFormation>p {
+    margin: 2%;
+}
 #listSessionFormation>div>div {
     background-color: var(--colorFour);
     width: 30%;
@@ -151,7 +163,6 @@ header ul li a:hover {
 }
 #formateurInfo a, #formateurInfo p {
     color: var(--colorTwo);
-    margin: 2%;
 }
 #formateurInfo>div {
     background-color: var(--colorThree);
@@ -159,11 +170,12 @@ header ul li a:hover {
 #formateurInfo>div:first-child {
     border-radius: 15px 15px 0 0;
     width: fit-content;
-    padding: 0 0.5%;
+    padding: 0.5% 2%;
     text-align: center;
 }
 #formateurInfo>div:nth-child(2){
     width: 100%;
+    padding: 2%;
 }
 /* endFormateurInfo */
 
@@ -185,8 +197,9 @@ header ul li a:hover {
     padding: 0.5% 2%;
     text-align: center;
 }
-#stagiaireInfo>div:nth-child(2){
+#stagiaireInfo>div:nth-child(n+2){
     width: 100%;
+    padding: 2%;
 }
 /* endStagiaireInfo */
 

@@ -15,11 +15,11 @@
 
                 <div id="listModuleSession">
                     {% for module in session.contenuSession %}
-                        <p><a href='{{ path('info_module', {'id': module.id}) }}'>{{module}}</a></a><a href="{{ path('remove_module_from_session', {'idsession': session.id, 'idmodule': module.id}) }}"> X </a></p>
+                        <p><a href='{{ path('info_module', {'id': module.id}) }}'>{{module.module.name}}</a></a><a href="{{ path('remove_module_from_session', {'idsession': session.id, 'idmodule': module.id}) }}"> X </a></p>
                     {% endfor %}
 
-                    {% for module in nonContenuSession %}
-                        <p><a href='{{ path('info_module', {'id': module.id}) }}'>{{module}}</a></a><a href="{{ path('remove_module_from_session', {'idsession': session.id, 'idmodule': module.id}) }}"> + </a></p>
+                    {% for module in nonModule %}
+                        <p><a href='{{ path('info_module', {'id': module.id}) }}'>{{module.module.name}}</a></a><a href="{{ path('remove_module_from_session', {'idsession': session.id, 'idmodule': module.id}) }}"> + </a></p>
                     {% endfor %}
                 </div>
 
@@ -32,7 +32,7 @@
 
                     <h2>Non inscrit :</h2>
 
-                    {% for stagiaire in nonInscits %}
+                    {% for stagiaire in nonInscrits %}
                         <p><a href='{{ path('info_stagiaire', {'id': stagiaire.id}) }}'>{{stagiaire}}</a><a href="{{ path('add_stagiaire_to_session', {'idsession': session.id, 'idstagiaire': stagiaire.id}) }}"> + </a></p>
                     {% endfor %}
                 </div>

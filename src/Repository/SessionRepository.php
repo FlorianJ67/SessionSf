@@ -73,21 +73,21 @@ class SessionRepository extends ServiceEntityRepository
 
         $qb = $sub;
         // sélectionner tous les modules d'une session dont l'id est passé en paramètre
-        $qb->select('m')
-            ->from('App\Entity\Module', 'm')
-            ->leftJoin('m.contenu_session', 'se')
-            ->where('se.id = :id');
+        $qb->select('cs')
+            ->from('App\Entity\ContenuSession', 'cs')
+            ->leftJoin('cs.session', 's')
+            ->where('s.id = :id');
 
         $sub = $em->createQueryBuilder();
         // sélectionner tous les modules qui ne SONT PAS (NOT IN) dans le résultat précédent
         // on obtient donc les modules non inscrits pour une session définie
-        $sub->select('mo')
-            ->from('App\Entity\Module','mo')
-            ->where($sub->expr()->notIn('mo.id', $qb->getDQL()))
+        $sub->select('cose')
+            ->from('App\Entity\ContenuSession','cose')
+            ->where($sub->expr()->notIn('cose.id', $qb->getDQL()))
             // requête parametrée
             ->setParameter('id', $session_id)
             // trier la liste des module sur le nom
-            ->orderBy('mo.name');
+            ->orderBy('cose.duree');
 
         // renvoyer le résultat
         $query = $sub->getQuery();

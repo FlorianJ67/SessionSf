@@ -54,6 +54,7 @@ class FormationController extends AbstractController
             'edit' => $formation->getId()
         ]);
     }
+    
 
     #[Route('/session/{idSession}/removeSessionFromFormation/{idFormation}/', name: 'remove_session_from_formation')]
     #[ParamConverter("formation", options:["mapping" => ["idFormation" => "id"]])]
