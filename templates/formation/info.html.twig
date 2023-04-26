@@ -14,17 +14,23 @@
                         <a href='{{ path('info_session', {'id': session.id}) }}'>{{ session }}</a>
                         
                         {% set dureeTotal = 0 %}
+
                         {% for contenu in session.contenuSession %}  
                             {% set dureeTotal = dureeTotal + contenu.duree %}
                         {% endfor %}
-
-                        {% set hour = 'heure' %}
-                        {% set min = 'minute' %}
+                        
+                        {# Conversion de la durée (total de minutes) sous format heure - min #}
                         {% set heureTotal = (dureeTotal/60)|round(0,'floor') %}
+                        {% set minutesRestant = dureeTotal-(heureTotal*60) %}
+
+                        {# Si heure > 1 ajouter un s au mot 'heure' #}
+                        {% set hour = 'heure' %}
                         {% if heureTotal > 1 %}
                             {% set hour = hour ~ 's' %}
                         {% endif %}
-                        {% set minutesRestant = dureeTotal-(heureTotal*60) %}
+                        
+                        {# Si minute > 1 ajouter un s au mot 'minute' #}
+                        {% set min = 'minute' %}
                         {% if minutesRestant > 1 %}
                             {% set min = min ~ 's' %}
                         {% endif %}

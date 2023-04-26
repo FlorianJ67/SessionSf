@@ -86,6 +86,10 @@ header {
 }
 /* endSessionList */
 
+/* ListSessionFormation */
+#listSessionFormation
+/* EndListSessionFormation */
+
 /* FormateurInfo */
 #formateurInfo {
     display: flex;
@@ -225,9 +229,7 @@ input[type="submit"],button[type="submit"] {
 }
 
 /* endAddCategorie */
-
 /* endFORM */
-
 /* --endMAIN-- */
 
 /* --FOOTER-- */
