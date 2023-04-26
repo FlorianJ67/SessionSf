@@ -10,12 +10,12 @@
                     <a href="{{ path('info_session', {'id': session.id}) }}">{{ session }}</a>
                 </div>
                 <div>
-                    <a>"Catégorie"</a>
+                    <a>"catégorie"</a>
                     <a href='{{ path('info_formation', {'id': session.formation.id}) }}'>Formation: {{ session.formation }}</a>
                     <a href='{{ path('info_formateur', {'id': session.formateur.id}) }}'>Formateur: {{ session.formateur }}</a>
                     <p>{{ session.dateDebut | date('d/m/Y')}} - {{ session.dateFin | date('d/m/Y')}}</p>
 
-                    <p>Place : /{{ session.place}}</p>
+                    <p>Place : {{ session.inscrit | length }}/{{ session.place}}</p>
                 </div>
             </div>
         {% endfor %}

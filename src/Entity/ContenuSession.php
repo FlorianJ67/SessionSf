@@ -14,20 +14,32 @@ class ContenuSession
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\Column]
+    private ?int $duree = null;
+
+    #[ORM\ManyToOne(inversedBy: 'contenuSession')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Module $module = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'contenuSession')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Session $session = null;
-
-    #[ORM\Column]
-    private ?int $duree = null;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getDuree(): ?int
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(int $duree): self
+    {
+        $this->duree = $duree;
+
+        return $this;
     }
 
     public function getModule(): ?Module
@@ -50,18 +62,6 @@ class ContenuSession
     public function setSession(?Session $session): self
     {
         $this->session = $session;
-
-        return $this;
-    }
-
-    public function getDuree(): ?int
-    {
-        return $this->duree;
-    }
-
-    public function setDuree(int $duree): self
-    {
-        $this->duree = $duree;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 {% block title %}Ajout Stagiaire{% endblock %}
 
 {% block body %}
+    <div id="addPage">
         {{ form_start(formAddStagiaire) }}
     
             {{ form_row(formAddStagiaire.firstName) }}
@@ -14,4 +15,5 @@
             {{ form_row(formAddStagiaire.email) }}
 
         {{ form_end(formAddStagiaire) }}
+    </div>
 {% endblock %}

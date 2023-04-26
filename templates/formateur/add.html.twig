@@ -3,6 +3,7 @@
 {% block title %}Ajout Formateur{% endblock %}
 
 {% block body %}
+    <div id="addPage">
         {{ form_start(formAddFormateur) }}
     
             {{ form_row(formAddFormateur.firstName) }}
@@ -14,4 +15,5 @@
             {{ form_row(formAddFormateur.email) }}
 
         {{ form_end(formAddFormateur) }}
+    </div>
 {% endblock %}

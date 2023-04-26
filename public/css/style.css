@@ -110,6 +110,30 @@ header {
 }
 /* endFormateurInfo */
 
+/* StagiaireInfo */
+#stagiaireInfo {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+#stagiaireInfo a, #stagiaireInfo p {
+    color: var(--colorTwo);
+    margin: 2%;
+}
+#stagiaireInfo>div {
+    background-color: var(--colorThree);
+}
+#stagiaireInfo>div:first-child {
+    border-radius: 15px 15px 0 0;
+    width: fit-content;
+    padding: 0 0.5%;
+    text-align: center;
+}
+#stagiaireInfo>div:nth-child(2){
+    width: 100%;
+}
+/* endStagiaireInfo */
+
 /* FormationInfo */
 #formationInfo {
     display: flex;
@@ -131,15 +155,77 @@ header {
 }
 /* endFormationInfo */
 
-/* FORM */
-input {
-    background-color: var(--colorTwo);
-}
-input[type="submit"] {
+#addPage {
+    position: relative;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--colorThree);
-    color: var(--colorTwo);
-    padding: 3px;
 }
+/* FORM */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    padding: 1%;
+    border-radius: 5px;
+}
+form>div {
+    margin: 1% 0;
+}
+form label {
+    color: var(--colorTwo);
+    padding-left: 1%;
+}
+form>div:not(:nth-last-child(2)) {
+    display: flex;
+    justify-content: space-between;
+}
+form>div:nth-last-child(2) {
+    display: flex;
+    justify-content: end;
+}
+form>div:not(:last-child)>input {
+    width: 30%;
+}
+form>div select {
+    width: 31%;
+}
+input,select,button {
+    border: solid 1px var(--colorThree);
+    background-color: var(--colorTwo);
+    border-radius: 5px;
+    margin-right: 1%;
+}
+input[type="submit"],button[type="submit"] {
+    background-color: var(--colorFour);
+    color: var(--colorTwo);
+    padding: 5px;
+}
+
+/* AddCategorie */
+#addCategorie, #addCategorieForm {
+    height: 60px;
+}
+#addCategorieForm {
+    position: absolute;
+    bottom: 55px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+#addCategorieForm>div:first-child {
+    width: 90%;
+}
+#addCategorieForm>div:nth-last-child(2) {
+    width: 10%;
+    padding: 1%;
+}
+
+/* endAddCategorie */
+
 /* endFORM */
 
 /* --endMAIN-- */

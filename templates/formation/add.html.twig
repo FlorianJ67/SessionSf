@@ -3,9 +3,11 @@
 {% block title %}Ajout Formation{% endblock %}
 
 {% block body %}
+    <div id="addPage">
         {{ form_start(formAddFormation) }}
     
             {{ form_row(formAddFormation.name) }}
 
         {{ form_end(formAddFormation) }}
+    </div>
 {% endblock %}

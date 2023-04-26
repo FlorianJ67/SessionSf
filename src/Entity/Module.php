@@ -22,12 +22,12 @@ class Module
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $Categorie = null;
 
-    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'modules')]
-    private Collection $sessions;
+    #[ORM\OneToMany(mappedBy: 'module', targetEntity: ContenuSession::class, orphanRemoval: true)]
+    private Collection $contenuSession;
 
     public function __construct()
     {
-        $this->sessions = new ArrayCollection();
+        $this->contenuSession = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -55,6 +55,36 @@ class Module
     public function setCategorie(?Categorie $Categorie): self
     {
         $this->Categorie = $Categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ContenuSession>
+     */
+    public function getContenuSession(): Collection
+    {
+        return $this->contenuSession;
+    }
+
+    public function addContenuSession(ContenuSession $contenuSession): self
+    {
+        if (!$this->contenuSession->contains($contenuSession)) {
+            $this->contenuSession->add($contenuSession);
+            $contenuSession->setModule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContenuSession(ContenuSession $contenuSession): self
+    {
+        if ($this->contenuSession->removeElement($contenuSession)) {
+            // set the owning side to null (unless already changed)
+            if ($contenuSession->getModule() === $this) {
+                $contenuSession->setModule(null);
+            }
+        }
 
         return $this;
     }

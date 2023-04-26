@@ -3,6 +3,7 @@
 {% block title %}Ajout Session{% endblock %}
 
 {% block body %}
+    <div id="addPage">
         {{ form_start(formAddSession) }}
     
             {{ form_row(formAddSession.name) }}
@@ -11,4 +12,5 @@
             {{ form_row(formAddSession.formateur) }}
 
         {{ form_end(formAddSession) }}
+    </div>
 {% endblock %}

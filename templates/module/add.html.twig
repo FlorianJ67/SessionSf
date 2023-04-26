@@ -3,17 +3,19 @@
 {% block title %}Ajout Module{% endblock %}
 
 {% block body %}
+    <div id="addPage">
         {{ form_start(formAddModule) }}
     
             {{ form_row(formAddModule.name) }}
             {{ form_row(formAddModule.categorie) }}
+            <div id="addCategorie"></div>
 
         {{ form_end(formAddModule) }}
 
-        {{ form_start(formAddCategorie) }}
+        {{ form_start(formAddCategorie, {'attr' :{'id' : 'addCategorieForm'}}) }}
     
             {{ form_row(formAddCategorie.name) }}
 
         {{ form_end(formAddCategorie) }}
-
+    </div>
 {% endblock %}

@@ -28,9 +28,6 @@ class Session
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     private ?Formateur $formateur = null;
 
-    #[ORM\ManyToMany(targetEntity: Module::class, inversedBy: 'sessions')]
-    private Collection $contenuSession;
-
     #[ORM\ManyToMany(targetEntity: Stagiaire::class, inversedBy: 'sessions')]
     private Collection $inscrit;
 
@@ -41,9 +38,13 @@ class Session
     #[ORM\JoinColumn(nullable: false)]
     private ?Formation $formation = null;
 
+    #[ORM\OneToMany(mappedBy: 'session', targetEntity: ContenuSession::class, orphanRemoval: true)]
+    private Collection $contenuSession;
+
     public function __construct()
     {
         $this->inscrit = new ArrayCollection();
+        $this->contenuSession = new ArrayCollection();
     }
 
     public function getId(): ?int

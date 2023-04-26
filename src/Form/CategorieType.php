@@ -14,7 +14,9 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class)
+            ->add('name', TextType::class, [
+                'label' => 'Nouvelle catégorie',
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter'
             ])

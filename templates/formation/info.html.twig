@@ -13,9 +13,28 @@
                     <div>
                         <a href='{{ path('info_session', {'id': session.id}) }}'>{{ session }}</a>
                         
-                        {# {{ session.contenuSession.duree }}               #}
+                        {% set dureeTotal = 0 %}
+                        {% for contenu in session.contenuSession %}  
+                            {% set dureeTotal = dureeTotal + contenu.duree %}
+                        {% endfor %}
+
+                        {% set hour = 'heure' %}
+                        {% set min = 'minute' %}
+                        {% set heureTotal = (dureeTotal/60)|round(0,'floor') %}
+                        {% if heureTotal > 1 %}
+                            {% set hour = hour ~ 's' %}
+                        {% endif %}
+                        {% set minutesRestant = dureeTotal-(heureTotal*60) %}
+                        {% if minutesRestant > 1 %}
+                            {% set min = min ~ 's' %}
+                        {% endif %}
+
+                        <p>Durée: {{ heureTotal ~ ' ' ~ hour ~ ' et ' ~ minutesRestant ~ ' '~ min}}</p>        
                     </div>
                 {% endfor %}
+            </div>
+            <div id="addPage">
+
             </div>
     </div>
 

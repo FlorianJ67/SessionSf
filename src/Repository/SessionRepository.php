@@ -65,8 +65,8 @@ class SessionRepository extends ServiceEntityRepository
         $query = $sub->getQuery();
         return $query->getResult();
     }
-    // !!!  le bug est là  !!!
-    // !!! !!! !!! !!! !!! !!!
+
+    // !!!!!! Toujours bugger !!!!!! //
     public function findNonModule($session_id) {
         $em = $this->getEntityManager();
         $sub = $em->createQueryBuilder();
@@ -75,7 +75,7 @@ class SessionRepository extends ServiceEntityRepository
         // sélectionner tous les modules d'une session dont l'id est passé en paramètre
         $qb->select('m')
             ->from('App\Entity\Module', 'm')
-            ->leftJoin('m.sessions', 'se')
+            ->leftJoin('m.contenu_session', 'se')
             ->where('se.id = :id');
 
         $sub = $em->createQueryBuilder();
