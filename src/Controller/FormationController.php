@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Formation;
+use App\Entity\Session;
 use App\Form\FormationType;
 
 class FormationController extends AbstractController
@@ -52,6 +53,30 @@ class FormationController extends AbstractController
             'formAddFormation' => $form->createView(),
             'edit' => $formation->getId()
         ]);
+    }
+
+    #[Route('/session/{idSession}/removeSessionFromFormation/{idFormation}/', name: 'remove_session_from_formation')]
+    #[ParamConverter("formation", options:["mapping" => ["idFormation" => "id"]])]
+    #[ParamConverter("session", options:["mapping" => ["idSession" => "id"]])]
+    public function removeSessionFromFormation(ManagerRegistry $doctrine, Formation $formation, Session $session, Request $request): Response{
+        
+        $entityManager = $doctrine->getManager();
+        $formation->removeSession($session);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('info_formation', ['id'=>$formation->getId()]);
+    }
+
+    #[Route('/formation/{idFormation}/addsessionToformation/{idSession}/', name: 'add_session_to_formation')]
+    #[ParamConverter("formation", options:["mapping" => ["idFormation" => "id"]])]
+    #[ParamConverter("session", options:["mapping" => ["idSession" => "id"]])]
+    public function addSessionToFormation(ManagerRegistry $doctrine, Formation $formation, Session $session, Request $request): Response{
+        
+        $entityManager = $doctrine->getManager();
+        $formation->addSession($session);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('info_formation', ['id'=>$formation->getId()]);
     }
 
     #[Route('/formation/{id}', name: 'info_formation')]

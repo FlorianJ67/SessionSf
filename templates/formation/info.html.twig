@@ -8,11 +8,42 @@
                 <a href="{{ path('info_formation', {'id': formation.id}) }}">{{ formation }}</a>
             </div>
             <div id="listSessionFormation">
-                <p>Sessions:</p>
+                {# nombre de session #}
+                {% set nbSession = formation.sessions|length %}
+                {# pluriel check #}
+                {% set session = "Session" %}
+                {% if nbSession > 1 %}
+                    {% set session = session ~ 's'%}
+                {% endif %}
+                <p>{{session ~':'}}</p>
+                
+                <div>
                 {% for session in formation.sessions %}
                     <div>
                         <a href='{{ path('info_session', {'id': session.id}) }}'>{{ session }}</a>
                         
+                            {# nombre de module #}
+                            {% set nbModule = session.contenuSession|length %}
+                            {# compteur #}
+                            {% set i = 0 %}
+                            {# pluriel check #}
+                            {% set module = "Module" %}
+                            {% if nbModule > 1 %}
+                                {% set module = module ~ 's'%}
+                            {% endif %}
+
+                        <p>{{ module ~ ':'}} 
+                            {% for contenu in session.contenuSession %}
+                                {{ contenu.module.name }}
+
+                                {% set i = i + 1 %}
+                                {# ajoute une virgule tand que ce n'est pas le dernier élément du tableau #}
+                                {% if i < nbModule %}
+                                    {{ ", "}}
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+
                         {% set dureeTotal = 0 %}
 
                         {% for contenu in session.contenuSession %}  
@@ -35,9 +66,10 @@
                             {% set min = min ~ 's' %}
                         {% endif %}
 
-                        <p>Durée: {{ heureTotal ~ ' ' ~ hour ~ ' et ' ~ minutesRestant ~ ' '~ min}}</p>        
+                        <p>{{ heureTotal ~ ' ' ~ hour ~ ' et ' ~ minutesRestant ~ ' '~ min}}</p>        
                     </div>
                 {% endfor %}
+                </div>
             </div>
             <div id="addPage">
 
