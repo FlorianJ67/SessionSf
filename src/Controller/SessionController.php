@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ContenuSession;
 use App\Entity\Module;
 use App\Entity\Session;
 use App\Entity\Stagiaire;
@@ -61,10 +62,12 @@ class SessionController extends AbstractController
     #[Route('/session/{idsession}/removeModuleFromSession/{idmodule}/', name: 'remove_module_from_session')]
     #[ParamConverter("session", options:["mapping" => ["idsession" => "id"]])]
     #[ParamConverter("module", options:["mapping" => ["idmodule" => "id"]])]
-    public function removeModuleFromSession(ManagerRegistry $doctrine, Session $session, Module $module, Request $request): Response{
+    public function removeModuleFromSession(ManagerRegistry $doctrine, Session $session, Module $module,ContenuSession $contenuSession, Request $request): Response{
         
         $entityManager = $doctrine->getManager();
-        $session->removeInscrit($module);
+        $session->removeContenuSession($module);
+        // !!!!trouver la commande pour supprimer
+        $contenuSession->remove($session);
         $entityManager->flush();
 
         return $this->redirectToRoute('info_session', ['id'=>$session->getId()]);
@@ -76,7 +79,7 @@ class SessionController extends AbstractController
     public function addModuleToSession(ManagerRegistry $doctrine, Session $session, Module $module, Request $request): Response{
         
         $entityManager = $doctrine->getManager();
-        $session->addInscrit($module);
+        $session->addContenuSession($module);
         $entityManager->flush();
 
         return $this->redirectToRoute('info_session', ['id'=>$session->getId()]);

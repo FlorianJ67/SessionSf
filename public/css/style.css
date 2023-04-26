@@ -54,11 +54,21 @@ header ul li a:hover {
 #content:first-child {
     border-radius: 15px 15px 0 0;
 }
-
+/* SessionInfo */
 #sessionInfo {
     background-color: var(--colorTwo);
     display: flex;
+    flex-direction: column;
+    padding: 2%;
+    width: 30%;
 }
+/* ListStagiaireSession */
+#listStagiaireSession{
+    border-top: 1px solid var(--colorThree);
+}
+/* endListStagiaireSession */
+/* endSessionInfo */
+
 /* FormationList */
 #formationList>div>div {
     background-color: var(--colorThree);

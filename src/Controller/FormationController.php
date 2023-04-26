@@ -56,8 +56,8 @@ class FormationController extends AbstractController
     }
     
 
-    #[Route('/session/{idSession}/removeSessionFromFormation/{idFormation}/', name: 'remove_session_from_formation')]
-    #[ParamConverter("formation", options:["mapping" => ["idFormation" => "id"]])]
+    #[Route('/session/{idsession}/removeSessionFromFormation/{idformation}/', name: 'remove_session_from_formation')]
+    #[ParamConverter("formation", options:["mapping" => ["idformation" => "id"]])]
     #[ParamConverter("session", options:["mapping" => ["idSession" => "id"]])]
     public function removeSessionFromFormation(ManagerRegistry $doctrine, Formation $formation, Session $session, Request $request): Response{
         
@@ -68,9 +68,9 @@ class FormationController extends AbstractController
         return $this->redirectToRoute('info_formation', ['id'=>$formation->getId()]);
     }
 
-    #[Route('/formation/{idFormation}/addsessionToformation/{idSession}/', name: 'add_session_to_formation')]
-    #[ParamConverter("formation", options:["mapping" => ["idFormation" => "id"]])]
-    #[ParamConverter("session", options:["mapping" => ["idSession" => "id"]])]
+    #[Route('/formation/{idformation}/addsessionToformation/{idsession}/', name: 'add_session_to_formation')]
+    #[ParamConverter("formation", options:["mapping" => ["idformation" => "id"]])]
+    #[ParamConverter("session", options:["mapping" => ["idsession" => "id"]])]
     public function addSessionToFormation(ManagerRegistry $doctrine, Formation $formation, Session $session, Request $request): Response{
         
         $entityManager = $doctrine->getManager();
