@@ -6,10 +6,17 @@
     <div id="addPage">
         {{ form_start(formAddSession) }}
     
+            {{ form_row(formAddSession.formation) }}
             {{ form_row(formAddSession.name) }}
-            {{ form_row(formAddSession.dateDebut) }}
-            {{ form_row(formAddSession.dateFin) }}
+            <div style="display: flex; margin-right: 5px;">
+                <label>Date: </label>
+                <div style="display: flex; width: 31.5%;">   
+                {{form_widget(formAddSession.dateDebut)}}
+                {{form_widget(formAddSession.dateFin) }}
+                </div>
+            </div>
             {{ form_row(formAddSession.formateur) }}
+            {{ form_row(formAddSession.place) }}
 
         {{ form_end(formAddSession) }}
     </div>

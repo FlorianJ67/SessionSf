@@ -15,7 +15,7 @@ class FormationType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => Formateur::class
+                'label' => 'Nom'
             ])
             ->add('submit', SubmitType::class)
         ;

@@ -1,0 +1,3 @@
+editer module
+ajout/modifier Formateur/Stagiaire (sur leurs index)
+gerer User

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StagiaireController!{% endblock %}
+{% block title %}Liste des stagiaires{% endblock %}
 
 {% block body %}
     <div id="stagiaireList">
@@ -8,7 +8,7 @@
             <div>
                 <div></div>
                 <div>
-                    <a href="{{ path('info_stagiaire', {'id': stagiaire.id}) }}">stagiaire {{ stagiaire }}</a>
+                    <a href="{{ path('info_stagiaire', {'id': stagiaire.id}) }}">Stagiaire {{ stagiaire }}</a>
                 </div>
             </div>
         {% endfor %}

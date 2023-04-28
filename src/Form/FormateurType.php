@@ -17,10 +17,10 @@ class FormateurType extends AbstractType
     {
         $builder
         ->add('firstName', TextType::class, [
-            'label' => 'Nom'
+            'label' => 'Prenom'
         ])
         ->add('lastName', TextType::class, [
-            'label' => 'Prenom'
+            'label' => 'Nom'
         ])
         ->add('sex', TextType::class, [
             'label' => 'Sex'
@@ -32,7 +32,9 @@ class FormateurType extends AbstractType
             'label' => 'Ville'
         ])
         ->add('birthday', DateType::class, [
-            'label' => 'Date de naissance'
+            'label' => 'Date de naissance',
+            'format' => 'yyyy-MM-dd',
+            'widget' => 'single_text'
         ])
         ->add('email', EmailType::class, [
             'label' => 'eMail'

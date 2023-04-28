@@ -15,8 +15,8 @@
                             <p>{{ contenu.module.categorie.name }}</p>
                         {% endfor %}
                     </div>
-                    <a href='{{ path('info_formation', {'id': session.formation.id}) }}'>Formation: {{ session.formation }}</a>
-                    <a href='{{ path('info_formateur', {'id': session.formateur.id}) }}'>Formateur: {{ session.formateur }}</a>
+                    <div><a href='{{ path('info_formation', {'id': session.formation.id}) }}'>Formation: {{ session.formation }}</a></div>
+                    <div><a href='{{ path('info_formateur', {'id': session.formateur.id}) }}'>Formateur: {{ session.formateur }}</a></div>
                     <p>{{ session.dateDebut | date('d/m/Y')}} - {{ session.dateFin | date('d/m/Y')}}</p>
 
                     <p>Place : {{ session.inscrit | length }}/{{ session.place}}</p>

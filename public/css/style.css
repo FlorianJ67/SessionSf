@@ -108,9 +108,10 @@ header ul li a:hover {
     background-color: var(--colorThree);
     width: 90%;
     display: flex;
+    justify-content: space-evenly;
     padding: 1%;
 }
-#sessionList a {
+#sessionList>div>div>p, #sessionList>div>div>div {
     margin: 0.7rem 0;
 }
 #sessionList>div {
@@ -295,17 +296,20 @@ input[type="submit"],button[type="submit"] {
 }
 #addCategorieForm {
     position: absolute;
-    bottom: 55px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
+    bottom: 24%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 #addCategorieForm>div:first-child {
-    width: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
 }
 #addCategorieForm>div:nth-last-child(2) {
-    width: 10%;
-    padding: 1%;
+    width: fit-content;
+    padding-right: 1%;
 }
 
 /* endAddCategorie */

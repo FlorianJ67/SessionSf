@@ -29,11 +29,13 @@ class StagiaireType extends AbstractType
                 'label' => 'Ville'
             ])
             ->add('birthday', DateType::class, [
-                'label' => 'Anniversaire',
+                'label' => 'Date de naissance',
                 // Affiche les 3 imput (jour mois année) en 1 seul input date
                 'widget' => 'single_text'
             ])
-            ->add('email' , EmailType::class)
+            ->add('email' , EmailType::class, [
+                'label' => 'eMail'
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter'
             ])
