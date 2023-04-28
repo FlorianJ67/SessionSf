@@ -20,9 +20,12 @@
                     {% endfor %}
 
                     <h3>Ajoutez :</h3>
-                    {% for module in nonModule %}
-                        <p><a href='{{ path('info_module', {'id': contenu.module.id}) }}'>{{contenu.module.name}}</a></a><a href="{{ path('add_module_to_session', {'idsession': session.id, 'idmodule': contenu.module.id}) }}"> + </a></p>
-                    {% endfor %}
+                    {{ form_start(formAddContenu) }}
+                        {{ form_row(formAddContenu.duree) }}
+                    {{ form_end(formAddContenu) }}
+                    {# {% for module in nonModules %}
+                        <p><a href='{{ path('info_module', {'id': module.id}) }}'>{{ module.name}}</a></a><a href="{{ path('add_module_to_session', {'idsession': session.id, 'idmodule': module.id}) }}"> + </a></p>
+                    {% endfor %} #}
                 </div>
 
                 <div id="listStagiaireSession">

@@ -22,7 +22,7 @@ class ContenuSession
     private ?Module $module = null;
 
     #[ORM\ManyToOne(inversedBy: 'contenuSession')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Session $session = null;
 
     public function getId(): ?int

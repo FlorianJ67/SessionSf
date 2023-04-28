@@ -101,14 +101,14 @@ class Session
     }
 
     /**
-     * @return Collection<int, Module>
+     * @return Collection<int, ContenuSession>
      */
     public function getContenuSession(): Collection
     {
         return $this->contenuSession;
     }
 
-    public function addContenuSession(Module $contenuSession): self
+    public function addContenuSession(ContenuSession $contenuSession): self
     {
         if (!$this->contenuSession->contains($contenuSession)) {
             $this->contenuSession->add($contenuSession);
@@ -117,7 +117,7 @@ class Session
         return $this;
     }
 
-    public function removeContenuSession(Module $contenuSession): self
+    public function removeContenuSession(ContenuSession $contenuSession): self
     {
         $this->contenuSession->removeElement($contenuSession);
 

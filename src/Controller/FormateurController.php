@@ -31,7 +31,7 @@ class FormateurController extends AbstractController
             $formateur = new Formateur();
         }
 
-        $form = $this->createForm(formateurType::class, $formateur);
+        $form = $this->createForm(FormateurType::class, $formateur);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){

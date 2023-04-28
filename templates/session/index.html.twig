@@ -10,7 +10,11 @@
                     <a href="{{ path('info_session', {'id': session.id}) }}">{{ session }}</a>
                 </div>
                 <div>
-                    <a>"catégorie"</a>
+                    <div>
+                        {% for contenu in session.contenuSession %}
+                            <p>{{ contenu.module.categorie.name }}</p>
+                        {% endfor %}
+                    </div>
                     <a href='{{ path('info_formation', {'id': session.formation.id}) }}'>Formation: {{ session.formation }}</a>
                     <a href='{{ path('info_formateur', {'id': session.formateur.id}) }}'>Formateur: {{ session.formateur }}</a>
                     <p>{{ session.dateDebut | date('d/m/Y')}} - {{ session.dateFin | date('d/m/Y')}}</p>

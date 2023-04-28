@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\ContenuSession;
 use App\Entity\Module;
 use App\Entity\Session;
 use App\Entity\Stagiaire;
+use App\Form\SessionType;
+use App\Entity\ContenuSession;
+use App\Form\ContenuSessionType;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,7 +39,7 @@ class SessionController extends AbstractController
             $session = new Session();
         }
 
-        $form = $this->createForm(sessionType::class, $session);
+        $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
 
 
@@ -62,12 +64,11 @@ class SessionController extends AbstractController
     #[Route('/session/{idsession}/removeModuleFromSession/{idmodule}/', name: 'remove_module_from_session')]
     #[ParamConverter("session", options:["mapping" => ["idsession" => "id"]])]
     #[ParamConverter("module", options:["mapping" => ["idmodule" => "id"]])]
-    public function removeModuleFromSession(ManagerRegistry $doctrine, Session $session, Module $module,ContenuSession $contenuSession, Request $request): Response{
+    public function removeModuleFromSession(ManagerRegistry $doctrine, Session $session, ContenuSession $contenuSession, Request $request): Response{
         
         $entityManager = $doctrine->getManager();
-        $session->removeContenuSession($module);
-        // !!!!trouver la commande pour supprimer
-        $contenuSession->remove($session);
+        $session->removeContenuSession($contenuSession);
+
         $entityManager->flush();
 
         return $this->redirectToRoute('info_session', ['id'=>$session->getId()]);
@@ -76,10 +77,10 @@ class SessionController extends AbstractController
     #[Route('/session/{idsession}/addModuleToSession/{idmodule}/', name: 'add_module_to_session')]
     #[ParamConverter("session", options:["mapping" => ["idsession" => "id"]])]
     #[ParamConverter("module", options:["mapping" => ["idmodule" => "id"]])]
-    public function addModuleToSession(ManagerRegistry $doctrine, Session $session, Module $module, Request $request): Response{
+    public function addModuleToSession(ManagerRegistry $doctrine, Session $session, ContenuSession $contenuSession, Request $request): Response{
         
         $entityManager = $doctrine->getManager();
-        $session->addContenuSession($module);
+        $session->addContenuSession($contenuSession);
         $entityManager->flush();
 
         return $this->redirectToRoute('info_session', ['id'=>$session->getId()]);
@@ -112,18 +113,35 @@ class SessionController extends AbstractController
 
     #[Route('/session/{id}', name: 'info_session')]
     // #[IsGranted("ROLE_USER")]
-    public function info(Session $session, SessionRepository $sr): Response
+    public function info(ManagerRegistry $doctrine,Session $session, ContenuSession $contenuSession= null, Request $request, SessionRepository $sr): Response
     {
         $session_id = $session->getId();
         $nonInscrits = $sr->findNonInscrits($session_id);
         $nonModules = $sr->findNonModule($session_id);
-        // $nonProgrammes = $sr->findNonProgrammes($session_id);
+
+        $form = $this->createForm(ContenuSessionType::class, $contenuSession);
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            
+            $contenu = $form->getData();
+            // On donne la session actuel dans le champ du formulaire
+            $contenu->setSession($session);  
+
+            $entityManager = $doctrine->getManager();
+            // prepare
+            $entityManager->persist($contenu);
+            // insert into (execute)
+            $entityManager->flush();
+
+            return $this->redirectToRoute('info_session', ['id'=>$session_id]);
+        }
 
         return $this->render('session/info.html.twig', [
             'session' => $session,
             'nonInscrits' => $nonInscrits,
-            'nonModule' => $nonModules,
-            // 'nonProgrammes' => $nonProgrammes
+            'nonModules' => $nonModules,
+            'formAddContenu' => $form->createView()
         ]);
     }
 }

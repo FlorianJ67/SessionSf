@@ -62,6 +62,9 @@ header ul li a:hover {
     padding: 2%;
     width: 30%;
 }
+#listModuleSession form label{
+    color: var(--colorThree);
+}
 /* ListStagiaireSession */
 #listStagiaireSession{
     border-top: 1px solid var(--colorThree);
@@ -136,10 +139,13 @@ header ul li a:hover {
 #sessionList>div>div:last-child>p:last-child, #sessionList>div>div:last-child>a:first-child {
     text-align: end;
 }
-#sessionList>div>div:last-child>a:first-child {
+#sessionList>div>div:last-child>div:first-child {
     position: absolute;
     right: 2%;
     margin: 0;
+}
+#sessionList>div>div:last-child>div:first-child p {
+    margin: 2px 0;
 }
 /* endSessionList */
 
