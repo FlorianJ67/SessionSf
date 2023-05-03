@@ -3,9 +3,16 @@
 {% block title %}Liste des Modules{% endblock %}
 
 {% block body %}
-    {% for module in modules %}
-        <a href="{{ path('info_module', {'id': module.id}) }}">{{ module.name }}</a>
-    {% endfor %}
+    <div id="formationList">
+        {% for module in modules %}
+            <div>
+                <div></div>
+                <div>
+                    <a href="{{ path('info_module', {'id': module.id}) }}">{{ module.name }}</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     <div id="addPage">
         {{ form_start(formAddModule) }}
     

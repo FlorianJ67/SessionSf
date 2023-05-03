@@ -6,9 +6,10 @@ use App\Entity\Formateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class FormateurType extends AbstractType
@@ -25,7 +26,7 @@ class FormateurType extends AbstractType
         ->add('sex', TextType::class, [
             'label' => 'Sex'
         ])
-        ->add('tel', TextType::class, [
+        ->add('tel', TelType::class, [
             'label' => 'Téléphone'
         ])
         ->add('city', TextType::class, [

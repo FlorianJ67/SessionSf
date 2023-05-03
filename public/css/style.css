@@ -30,6 +30,19 @@ header ul li a {
 header ul li a:hover {
     opacity: 0.7;
 }
+header ul li i {
+    border: 1px solid;
+    border-radius: 75px;
+    padding: 2px;
+    scale: 0.7;
+}
+header ul li a i {
+    height: 15px;
+    width: 15px;
+}
+header ul li a:hover>i{
+    color: rgb(113, 211, 113);
+}
 /* --endHEADER-- */
 
 /* --MAIN-- */
@@ -69,19 +82,47 @@ header ul li a:hover {
 #listStagiaireSession{
     border-top: 1px solid var(--colorThree);
 }
+#listStagiaireSession a>.fa-trash, #listModuleSession a>.fa-trash{
+    margin: 0 3px;
+    height: 15px;
+    width: 15px;
+}
+#listStagiaireSession a:hover>.fa-trash, #listModuleSession a:hover>.fa-trash {
+    color: rgb(155, 34, 34);
+}
+#listStagiaireSession a>.fa-plus, #listModuleSession a>.fa-plus {
+    margin: 0 3px;
+    padding: 2px;
+    border-radius: 90px;
+    border: 1px solid;
+    scale: 0.7;
+    height: 15px;
+    width: 15px;
+}
+#listStagiaireSession a:hover>.fa-plus, #listModuleSession a:hover>.fa-plus{
+    color: rgb(53, 157, 53);
+}
 /* endListStagiaireSession */
 /* endSessionInfo */
 
 /* FormationList */
+#formationList {
+    display: flex;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#formationList>div {
+    margin: 3%;
+    height: 70px;
+    min-width: 100px;
+}
 #formationList>div>div {
     background-color: var(--colorThree);
     padding: 0 5%;
 }
 #formationList>div>div a {
     color: var(--colorTwo);
-}
-#formationList>div {
-    margin: 3% 0;
 }
 #formationList>div:hover div {
     box-shadow: rgba(255, 254, 254, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.12) 0px -12px 30px, rgba(255, 255, 255, 0.12) 0px 4px 6px, rgba(255, 255, 255, 0.17) 0px 12px 13px, rgba(255, 255, 255, 0.09) 0px -3px 5px;
@@ -100,6 +141,7 @@ header ul li a:hover {
 #formationList>div>div:nth-child(2){
     border-radius: 0 5px 5px 5px;
     padding: 8%;
+    min-height: -webkit-fill-available;
 }
 /* endFormationList */
 
@@ -311,8 +353,14 @@ input[type="submit"],button[type="submit"] {
     width: fit-content;
     padding-right: 1%;
 }
-
 /* endAddCategorie */
+#session_dateDebut, #session_dateFin {
+    width: 49%;
+}
+/* AddSession */
+
+
+/* endAddSession */
 /* endFORM */
 /* --endMAIN-- */
 

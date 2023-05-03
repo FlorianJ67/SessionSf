@@ -16,7 +16,7 @@
                 <div id="listModuleSession">
                     <h3>Contient :</h3>
                     {% for contenu in session.contenuSession %}
-                        <p><a href='{{ path('info_module', {'id': contenu.module.id}) }}'>{{contenu.module.name}} | {{contenu.duree}} min</a></a><a href="{{ path('remove_module_from_session', {'idsession': session.id, 'idmodule': contenu.module.id}) }}"> X </a></p>
+                        <p><a href='{{ path('info_module', {'id': contenu.module.id}) }}'>{{contenu.module.name}} | {{contenu.duree}} min</a></a><a href="{{ path('remove_module_from_session', {'idsession': session.id, 'idmodule': contenu.module.id}) }}"><i class="fa-solid fa-trash"></i></a></p>
                     {% endfor %}
 
                     <h3>Ajoutez :</h3>
@@ -29,13 +29,13 @@
                     <h3>Inscrit :</h3>
 
                     {% for stagiaire in session.inscrit %}
-                        <p><a href='{{ path('info_stagiaire', {'id': stagiaire.id}) }}'>{{stagiaire}}</a></a><a href="{{ path('remove_stagiaire_from_session', {'idsession': session.id, 'idstagiaire': stagiaire.id}) }}"> X </a></p>
+                        <p><a href='{{ path('info_stagiaire', {'id': stagiaire.id}) }}'>{{stagiaire}}</a></a><a href="{{ path('remove_stagiaire_from_session', {'idsession': session.id, 'idstagiaire': stagiaire.id}) }}"><i class="fa-solid fa-trash"></i></a></p>
                     {% endfor %}
 
                     <h3>Non inscrit :</h3>
 
                     {% for stagiaire in nonInscrits %}
-                        <p><a href='{{ path('info_stagiaire', {'id': stagiaire.id}) }}'>{{stagiaire}}</a><a href="{{ path('add_stagiaire_to_session', {'idsession': session.id, 'idstagiaire': stagiaire.id}) }}"> + </a></p>
+                        <p><a href='{{ path('info_stagiaire', {'id': stagiaire.id}) }}'>{{stagiaire}}</a><a href="{{ path('add_stagiaire_to_session', {'idsession': session.id, 'idstagiaire': stagiaire.id}) }}"><i class="fa-solid fa-plus"></i></a></p>
                     {% endfor %}
                 </div>
             </div>

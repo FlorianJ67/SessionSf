@@ -1,23 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Info formation{% endblock %}
+{% block title %}Info formation {{ formation }}{% endblock %}
 
 {% block body %}
     <div id="formationInfo">
+        <div>
+            <a href="{{ path('info_formation', {'id': formation.id}) }}">{{ formation }}</a>
+        </div>
+        <div id="listSessionFormation">
+            {# nombre de session #}
+            {% set nbSession = formation.sessions|length %}
+            {# pluriel check #}
+            {% set session = "Session" %}
+            {% if nbSession > 1 %}
+                {% set session = session ~ 's'%}
+            {% endif %}
+            <p>{{session ~':'}}</p>
+              
             <div>
-                <a href="{{ path('info_formation', {'id': formation.id}) }}">{{ formation }}</a>
-            </div>
-            <div id="listSessionFormation">
-                {# nombre de session #}
-                {% set nbSession = formation.sessions|length %}
-                {# pluriel check #}
-                {% set session = "Session" %}
-                {% if nbSession > 1 %}
-                    {% set session = session ~ 's'%}
-                {% endif %}
-                <p>{{session ~':'}}</p>
-                
-                <div>
                 {% for session in formation.sessions %}
                     <div>
                         <a href='{{ path('info_session', {'id': session.id}) }}'>{{ session }}</a>
@@ -32,7 +32,8 @@
                                 {% set module = module ~ 's'%}
                             {% endif %}
 
-                        <p>{{ module ~ ':'}} 
+                        <p>
+                            {{ module ~ ':'}} 
                             {% for contenu in session.contenuSession %}
                                 {{ contenu.module.name }}
 
@@ -69,11 +70,8 @@
                         <p>{{ heureTotal ~ ' ' ~ hour ~ ' et ' ~ minutesRestant ~ ' '~ min}}</p>        
                     </div>
                 {% endfor %}
-                </div>
             </div>
-            <div id="addPage">
-
-            </div>
+        </div>
     </div>
 
 {% endblock %}

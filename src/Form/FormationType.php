@@ -17,7 +17,9 @@ class FormationType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom'
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Créer la Formation'
+            ])
         ;
     }
 

@@ -6,13 +6,12 @@
     <div id="moduleInfo">
             <div>
                 <a href="{{ path('info_module', {'id': module.id}) }}">{{ module.name }}</a>
+                <a href="{{ path('edit_module', {'id': module.id}) }}"><i class="fas fa-edit"></i></a>
             </div>
             <div>
                 <div>
-                    <a href="{{ path('edit_module', {'id': module.id}) }}">Modifier</a>
                 </div>
-                <p>Catégorie: {{ module.categorie.name }}</p>
-               
+                <p>Catégorie: {{ module.categorie.name }}</p>   
             </div>
     </div>
 

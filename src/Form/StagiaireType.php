@@ -24,7 +24,9 @@ class StagiaireType extends AbstractType
                 'label' => 'Nom'
             ])
             ->add('sex', TextType::class)
-            ->add('tel', TelType::class)
+            ->add('tel', TelType::class, [
+                'label' => 'Téléphone'
+            ])
             ->add('city', TextType::class, [
                 'label' => 'Ville'
             ])
