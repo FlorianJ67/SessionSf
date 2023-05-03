@@ -27,7 +27,7 @@ class ModuleController extends AbstractController
         if(!$categorie){
             $categorie = new Categorie();
         }
-
+        // On créer le formulaire                  //On genère l'objet qu'on souhaite Éditer
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($request);
 
