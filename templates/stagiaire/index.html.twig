@@ -13,4 +13,17 @@
             </div>
         {% endfor %}
     </div>
+    <div id="addPage">
+        {{ form_start(formAddStagiaire) }}
+    
+            {{ form_row(formAddStagiaire.firstName) }}
+            {{ form_row(formAddStagiaire.lastName) }}
+            {{ form_row(formAddStagiaire.sex) }}
+            {{ form_row(formAddStagiaire.tel) }}
+            {{ form_row(formAddStagiaire.city) }}
+            {{ form_row(formAddStagiaire.birthday) }}
+            {{ form_row(formAddStagiaire.email) }}
+
+        {{ form_end(formAddStagiaire) }}
+    </div>
 {% endblock %}

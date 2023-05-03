@@ -1,3 +1,2 @@
-editer module
-ajout/modifier Formateur/Stagiaire (sur leurs index)
+retirer l'auto complétion de la catégorie lors de l'édit de Module
 gerer User

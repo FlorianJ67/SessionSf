@@ -14,18 +14,10 @@ use App\Form\FormateurType;
 class FormateurController extends AbstractController
 {
     #[Route('/formateur', name: 'app_formateur')]
-    public function index(EntityManagerInterface $entityManager): Response
+    #[Route('/formateur/{id}/edit', name: 'edit_formateur')]
+    public function index(EntityManagerInterface $entityManager, ManagerRegistry $doctrine, Formateur $formateur = null, Request $request): Response
     {
         $formateurs = $entityManager->getRepository(formateur::class)->findAll();
-        return $this->render('formateur/index.html.twig', [
-            'formateurs' => $formateurs
-        ]);
-    }
-
-    #[Route('/formateur/add', name: 'add_formateur')]
-    #[Route('/formateur/{id}/edit', name: 'edit_formateur')]
-    public function add(ManagerRegistry $doctrine, Formateur $formateur = null, Request $request): Response
-    {
 
         if(!$formateur){
             $formateur = new Formateur();
@@ -43,10 +35,10 @@ class FormateurController extends AbstractController
             // insert into (execute)
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_formateur');
         }
 
-        return $this->render('formateur/add.html.twig', [
+        return $this->render('formateur/index.html.twig', [
+            'formateurs' => $formateurs,
             'formAddFormateur' => $form->createView(),
             'edit' => $formateur->getId()
         ]);

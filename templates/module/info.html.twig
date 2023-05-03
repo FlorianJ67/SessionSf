@@ -8,6 +8,9 @@
                 <a href="{{ path('info_module', {'id': module.id}) }}">{{ module.name }}</a>
             </div>
             <div>
+                <div>
+                    <a href="{{ path('edit_module', {'id': module.id}) }}">Modifier</a>
+                </div>
                 <p>Catégorie: {{ module.categorie.name }}</p>
                
             </div>

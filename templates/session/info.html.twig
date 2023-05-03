@@ -16,7 +16,7 @@
                 <div id="listModuleSession">
                     <h3>Contient :</h3>
                     {% for contenu in session.contenuSession %}
-                        <p><a href='{{ path('info_module', {'id': contenu.module.id}) }}'>{{contenu.module.name}}</a></a><a href="{{ path('remove_module_from_session', {'idsession': session.id, 'idmodule': contenu.module.id}) }}"> X </a></p>
+                        <p><a href='{{ path('info_module', {'id': contenu.module.id}) }}'>{{contenu.module.name}} | {{contenu.duree}} min</a></a><a href="{{ path('remove_module_from_session', {'idsession': session.id, 'idmodule': contenu.module.id}) }}"> X </a></p>
                     {% endfor %}
 
                     <h3>Ajoutez :</h3>

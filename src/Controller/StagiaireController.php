@@ -14,19 +14,10 @@ use App\Form\StagiaireType;
 class StagiaireController extends AbstractController
 {
     #[Route('/stagiaire', name: 'app_stagiaire')]
-    public function index(EntityManagerInterface $entityManager): Response
+    #[Route('/stagiaire/{id}/edit', name: 'edit_stagiaire')]
+    public function index(EntityManagerInterface $entityManager, ManagerRegistry $doctrine, Stagiaire $stagiaire = null, Request $request): Response
     {
         $stagiaires = $entityManager->getRepository(stagiaire::class)->findAll();
-
-        return $this->render('stagiaire/index.html.twig', [
-            'stagiaires' => $stagiaires,
-        ]);
-    }
-
-    #[Route('/stagiaire/add', name: 'add_stagiaire')]
-    #[Route('/stagiaire/{id}/edit', name: 'edit_stagiaire')]
-    public function add(ManagerRegistry $doctrine, Stagiaire $stagiaire = null, Request $request): Response
-    {
 
         if(!$stagiaire){
             $stagiaire = new Stagiaire();
@@ -44,10 +35,10 @@ class StagiaireController extends AbstractController
             // insert into (execute)
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_stagiaire');
         }
 
-        return $this->render('stagiaire/add.html.twig', [
+        return $this->render('stagiaire/index.html.twig', [
+            'stagiaires' => $stagiaires,
             'formAddStagiaire' => $form->createView(),
             'edit' => $stagiaire->getId()
         ]);
